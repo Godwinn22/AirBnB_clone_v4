@@ -20,3 +20,22 @@ $(document).ready(function () {
     $('.amenities h4').text('Selected Amenities: ' + amenitiesList);
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const apiStatus = document.getElementById('api_status');
+
+  // Fetch API status
+  fetch('http://0.0.0.0:5001/api/v1/status/')
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'OK') {
+        apiStatus.classList.add('available');
+      } else {
+        apiStatus.classList.remove('available');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching API status:', error);
+      apiStatus.classList.remove('available');
+    });
+});
